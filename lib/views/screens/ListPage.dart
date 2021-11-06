@@ -8,11 +8,16 @@ class ListPage extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Card(
+          elevation: 20,
           child: Padding(
             padding: const EdgeInsets.all(4.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: AnniversaryTile(),
+                ),
                 AnniversaryTile(),
                 // const ListTile(
                 //   leading: Icon(Icons.album),
