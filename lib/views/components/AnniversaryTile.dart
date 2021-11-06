@@ -1,62 +1,78 @@
 import 'package:flutter/material.dart';
+import 'package:notice_anniversary/const/ConstInfo.dart';
 
-Widget AnniversaryTile() {
-  return Container(
-    height: 200,
-    child: Row(
-      children: <Widget>[
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              Text("1-1", style: TextStyle(fontSize: 20.0)),
-              Text("1-2", style: TextStyle(fontSize: 80.0)),
-            ],
-          ),
-        ),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text("2-1", style: TextStyle(fontSize: 20.0)),
-            ],
-          ),
-        ),
-      ],
-    ),
-  );
+class AnniversaryTile extends StatelessWidget {
+  final int month;
+  final int day;
+  final String tag;
+  final String title;
 
-  // return Row(
-  //   children: <Widget>[
-  //     Container(
-  //       height: 100,
-  //       child: Column(
-  //
-  //       ),
-  //
-  //     ),
-  //
-  //
-  //
-  //     // Expanded(
-  //     //   flex: 1,
-  //     //   child: Column(
-  //     //     // crossAxisAlignment: CrossAxisAlignment.values = [CrossAxisAlignment.center,CrossAxisAlignment.center],
-  //     //     children: <Widget>[
-  //     //       Text("1-1", style: TextStyle(fontSize: 20.0)),
-  //     //       Text("2-1", style: TextStyle(fontSize: 80.0)),
-  //     //     ],
-  //     //   ),
-  //     // ),
-  //     // Column(
-  //     //   mainAxisAlignment: MainAxisAlignment.end,
-  //     //   crossAxisAlignment: CrossAxisAlignment.end,
-  //     //   children: <Widget>[
-  //     //     Text("2-2", style: TextStyle(fontSize: 40.0)),
-  //     //   ],
-  //     // ),
-  //   ],
-  // );
+  AnniversaryTile({
+    required this.month,
+    required this.day,
+    required this.tag,
+    required this.title,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 8.0,
+      color: Colors.pink.shade100,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      child: Container(
+        height: 100,
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 4.0),
+                        child: Text(
+                          "$month月$day日",
+                          style: TextStyle(
+                            fontSize: tileFontSizeSmall,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: Padding(
+                      padding: EdgeInsets.only(right: 4.0),
+                      child: Text(
+                        "$tag",
+                        style: TextStyle(
+                          fontSize: tileFontSizeSmall,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Text(
+                "$title",
+                style: TextStyle(
+                  fontSize: tileFontSizeLarge,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

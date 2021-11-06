@@ -4,46 +4,32 @@ import 'package:notice_anniversary/views/components/AnniversaryTile.dart';
 class ListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Card(
-          elevation: 20,
-          child: Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: AnniversaryTile(),
-                ),
-                AnniversaryTile(),
-                // const ListTile(
-                //   leading: Icon(Icons.album),
-                //   title: Text('The Enchanted Nightingale'),
-                //   subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
-                // ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.end,
-                //   children: <Widget>[
-                //     TextButton(
-                //       child: const Text('BUY TICKETS'),
-                //       onPressed: () {
-                //         /* ... */
-                //       },
-                //     ),
-                //     const SizedBox(width: 8),
-                //     TextButton(
-                //       child: const Text('LISTEN'),
-                //       onPressed: () {
-                //         /* ... */
-                //       },
-                //     ),
-                //     const SizedBox(width: 8),
-                //   ],
-                // ),
-              ],
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.pink.shade50,
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.pink.shade200,
+          child: Icon(Icons.add),
+          tooltip: "追加",
+          onPressed: null,
+        ),
+        body: SingleChildScrollView(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: AnniversaryTile(
+                      month: 12,
+                      day: 1,
+                      tag: "誕生日",
+                      title: "片岡の誕生日",
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
