@@ -4,7 +4,7 @@ import 'package:notice_anniversary/const/ConstInfo.dart';
 class AnniversaryTile extends StatelessWidget {
   final int month;
   final int day;
-  final String tag;
+  final int tag;
   final String title;
 
   AnniversaryTile({
@@ -13,6 +13,17 @@ class AnniversaryTile extends StatelessWidget {
     required this.tag,
     required this.title,
   });
+
+  String tagName() {
+    switch (tag) {
+      case 0:
+        return "記念日";
+      case 1:
+        return "誕生日";
+      default:
+        return "その他";
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +60,7 @@ class AnniversaryTile extends StatelessWidget {
                     child: Padding(
                       padding: EdgeInsets.only(right: 4.0),
                       child: Text(
-                        "$tag",
+                        tagName(),
                         style: TextStyle(
                           fontSize: tileFontSizeSmall,
                           color: Colors.white,

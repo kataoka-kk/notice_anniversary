@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:convert';
+import 'package:notice_anniversary/models/model/AnniversaryModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageRepository {
@@ -19,10 +21,16 @@ class StorageRepository {
   }
 
   //読み込み
-  Future<List<String>> loadStorageAnniversary(String key) async {
-    var completer = new Completer<List<String>>();
+  Future<List<Anniversary>> loadStorageAnniversary(String key) async {
+    var completer = new Completer<List<Anniversary>>();
+    List<Anniversary> results = [];
     _instance.prefs.then((pref) {
-      completer.complete(pref.getStringList(key));
+      final storageList = pref.getStringList(key) as dynamic;
+      if (storageList != null) {
+        results =
+            Anniversary.fromJson(jsonDecode(storageList)) as List<Anniversary>;
+      }
+      completer.complete(results);
     });
     return completer.future;
   }

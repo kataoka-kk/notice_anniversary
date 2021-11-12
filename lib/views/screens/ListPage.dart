@@ -7,6 +7,11 @@ class ListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.read<ListViewModel>();
+    if (!viewModel.isLoad) {
+      //TODO
+      print("!viewModel.isLoad: init");
+      viewModel.loadAnniversary();
+    }
 
     return SafeArea(
       child: Scaffold(
@@ -34,20 +39,21 @@ class ListPage extends StatelessWidget {
   }
 
   Widget listViewBuilder(ListViewModel model) {
-    //TODO: 一旦複数明細かつ、切り出しを行えた
+    print("Widget listViewBuilder(ListViewModel model)!!!!!!!!!");
+    print(model.anniversaries.length);
+    print(model.anniversaries);
 
     return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: 10,
-      // itemCount: model.articles.length,
+      itemCount: model.anniversaries.length,
       itemBuilder: (context, int position) => Padding(
         padding: const EdgeInsets.all(2.0),
         child: AnniversaryTile(
-          month: 12,
-          day: 1,
-          tag: "誕生日",
-          title: "片岡康希の誕生日",
+          month: model.anniversaries[position].dateTime.month,
+          day: model.anniversaries[position].dateTime.day,
+          tag: model.anniversaries[position].tagNum,
+          title: model.anniversaries[position].title,
         ),
       ),
     );
