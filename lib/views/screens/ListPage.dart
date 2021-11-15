@@ -20,7 +20,9 @@ class ListPage extends StatelessWidget {
           backgroundColor: Colors.pink.shade200,
           child: Icon(Icons.add),
           tooltip: "追加",
-          onPressed: null,
+          onPressed: () {
+            Navigator.pushNamed(context, '/Update');
+          },
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -57,5 +59,22 @@ class ListPage extends StatelessWidget {
         ),
       ),
     );
+
+    //TODO 画面のテストコード
+    // return ListView.builder(
+    //   shrinkWrap: true,
+    //   physics: const NeverScrollableScrollPhysics(),
+    //   itemCount: 10,
+    //   itemBuilder: (context, int position) => Padding(
+    //     padding: const EdgeInsets.all(2.0),
+    //     child: AnniversaryTile(
+    //       month: 12,
+    //       day: 1,
+    //       tag: 1,
+    //       title: "片岡テスト誕生日",
+    //     ),
+    //   ),
+    // );
+
   }
 }

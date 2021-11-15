@@ -4,7 +4,6 @@ import 'package:notice_anniversary/models/model/AnniversaryModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageRepository {
-  //TODO:Modelを読む。書き込む
   final _PersistenceStorageProvider _instance =
       _PersistenceStorageProvider.instance;
 
