@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notice_anniversary/const/OwnColor.dart';
 import 'package:notice_anniversary/viewmodels/ListViewModel.dart';
 import 'package:notice_anniversary/viewmodels/UpdateViewModel.dart';
 import 'package:notice_anniversary/views/ScreenConst.dart';
@@ -26,7 +27,7 @@ class _MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "記念日通知アプリ",
-      theme: ThemeData(primarySwatch: Colors.blue),
+      theme: ThemeData(primarySwatch: OwnColor.whiteColor),
       routes: ScreenConst.screens,
     );
   }
