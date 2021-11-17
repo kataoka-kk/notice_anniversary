@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:notice_anniversary/const/ConstInfo.dart';
-import 'package:notice_anniversary/const/OwnColor.dart';
+import 'package:notice_anniversary/viewmodels/UpdateViewModel.dart';
+import 'package:provider/src/provider.dart';
 
 class UpdatePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //TODO 11/16～UpdatePageの作業をしていく
+    final viewModel = context.read<UpdateViewModel>();
+    if (!viewModel.isInit) {
+      print("!viewModel.isInit: init");
+      viewModel.setItems();
+    }
 
-    //✓タイトルフィールドの作成
-    //何月何日のフィールドの作成
-    //ラベル（記念日、誕生日、その他）選択の作成
+    //TODO 11/16～UpdatePageの作業をしていく
+    // ✓タイトルフィールドの作成
+    // 何月何日のフィールドの作成
+    // ラベル（記念日、誕生日、その他）選択の作成
+
+    //TODO:return ChangeNotifierProviderしてないから値が変わっても通知されていない恐れがあり。
+    //DropdownButtonが反応しない。
 
     return SafeArea(
       child: Scaffold(
@@ -19,10 +26,22 @@ class UpdatePage extends StatelessWidget {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(4.0),
+              child: Card(
+                child: DropdownButton(
+                  items: viewModel.anniversaryItems,
+                  value: viewModel.numAnniversary,
+                  onChanged: (int? selectedValue) {
+                    viewModel.onChanged(selectedValue);
+                  },
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(4.0),
               //TODO:このカードはピンクカードとして基底クラスの作成をする
               // AnniversaryTileのカードもそうしたい
               child: Card(
-                elevation:  8.0,
+                elevation: 8.0,
                 color: Colors.pink.shade100,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0),
@@ -39,7 +58,7 @@ class UpdatePage extends StatelessWidget {
                         color: Colors.white,
                       ),
                       focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
+                        borderSide: BorderSide(
                           color: Colors.white,
                         ),
                       ),
