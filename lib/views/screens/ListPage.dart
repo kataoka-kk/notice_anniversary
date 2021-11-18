@@ -8,7 +8,6 @@ class ListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final viewModel = context.read<ListViewModel>();
     if (!viewModel.isLoad) {
-      //TODO
       print("!viewModel.isLoad: init");
       viewModel.loadAnniversary();
     }
@@ -26,7 +25,7 @@ class ListPage extends StatelessWidget {
         ),
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(4.0),
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Column(
               children: <Widget>[
                 Consumer<ListViewModel>(builder: (context, model, child) {
@@ -50,7 +49,7 @@ class ListPage extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       itemCount: model.anniversaries.length,
       itemBuilder: (context, int position) => Padding(
-        padding: const EdgeInsets.all(2.0),
+        padding: const EdgeInsets.all(4.0),
         child: AnniversaryTile(
           month: model.anniversaries[position].dateTime.month,
           day: model.anniversaries[position].dateTime.day,
@@ -66,7 +65,7 @@ class ListPage extends StatelessWidget {
     //   physics: const NeverScrollableScrollPhysics(),
     //   itemCount: 10,
     //   itemBuilder: (context, int position) => Padding(
-    //     padding: const EdgeInsets.all(2.0),
+    //     padding: const EdgeInsets.all(4.0),
     //     child: AnniversaryTile(
     //       month: 12,
     //       day: 1,
@@ -75,6 +74,5 @@ class ListPage extends StatelessWidget {
     //     ),
     //   ),
     // );
-
   }
 }

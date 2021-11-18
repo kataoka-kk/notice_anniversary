@@ -9,6 +9,10 @@ class UpdateViewModel extends ChangeNotifier {
 
   int get numAnniversary => _numAnniversary;
 
+  DateTime _selectDay = DateTime.now();
+
+  DateTime get selectDay => _selectDay;
+
   List<DropdownMenuItem<int>> _anniversaryItems = [];
 
   List<DropdownMenuItem<int>> get anniversaryItems => _anniversaryItems;
@@ -23,6 +27,12 @@ class UpdateViewModel extends ChangeNotifier {
   void onChanged(int? value) {
     print("onChanged：$value");
     _numAnniversary = value!;
+    notifyListeners();
+  }
+
+  void onConfirm(DateTime date) {
+    print("onConfirm：$date");
+    _selectDay = date;
     notifyListeners();
   }
 }
