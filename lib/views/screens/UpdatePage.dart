@@ -13,11 +13,6 @@ class UpdatePage extends StatelessWidget {
       viewModel.setItems();
     }
 
-    //TODO 11/16～UpdatePageの作業をしていく
-    // ✓タイトルフィールドの作成
-    // 何月何日のフィールドの作成
-    // ✓ラベル（記念日、誕生日、その他）選択の作成
-
     //TODO 11/18～UpdatePageに追加機能の作成
 
     return SafeArea(
@@ -29,13 +24,13 @@ class UpdatePage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Consumer<UpdateViewModel>(
-                  builder: (context, model, child) {
-                    return Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      //TODO:このカードはピンクカードとして基底クラスの作成をする
-                      // AnniversaryTileのカードもそうしたい
-                      child: Card(
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  //TODO:このカードはピンクカードとして基底クラスの作成をする
+                  // AnniversaryTileのカードもそうしたい
+                  child: Consumer<UpdateViewModel>(
+                    builder: (context, model, child) {
+                      return Card(
                         elevation: 8.0,
                         color: Colors.pink.shade100,
                         shape: RoundedRectangleBorder(
@@ -60,9 +55,9 @@ class UpdatePage extends StatelessWidget {
                             },
                           ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(4.0),
@@ -157,17 +152,51 @@ class UpdatePage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 128.0, vertical: 4.0),
-                  child: OutlinedButton(
-                    child: const Text('登録'),
-                    style: OutlinedButton.styleFrom(
-                      elevation: 8.0,
-                      primary: Colors.white,
-                      textStyle: const TextStyle(fontSize: 20.0),
-                      shape: const StadiumBorder(),
-                      side: const BorderSide(color: Colors.transparent),
-                      backgroundColor: Colors.pink.shade100,
-                    ),
-                    onPressed: () {},
+                  child: Consumer<UpdateViewModel>(
+                    builder: (context, model, child) {
+                      return OutlinedButton(
+                        child: const Text('登録'),
+                        style: OutlinedButton.styleFrom(
+                          elevation: 8.0,
+                          primary: Colors.white,
+                          textStyle: const TextStyle(fontSize: 20.0),
+                          shape: const StadiumBorder(),
+                          side: const BorderSide(color: Colors.transparent),
+                          backgroundColor: Colors.pink.shade100,
+                        ),
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (_) {
+                              return AlertDialog(
+                                title: Text(viewModel.contentText),
+                                content: Text(
+                                    "上記を${viewModel.contentText}してもいいですか？"),
+                                actions: <Widget>[
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(context),
+                                    child: Text(
+                                      "キャンセル",
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      viewModel.onEntry();
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text(
+                                      "OK",
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                      );
+                    },
                   ),
                 ),
               ],
