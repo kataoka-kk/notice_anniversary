@@ -25,127 +25,153 @@ class UpdatePage extends StatelessWidget {
         backgroundColor: Colors.pink.shade50,
         body: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Consumer<UpdateViewModel>(
-                builder: (context, model, child) {
-                  return Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Card(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Consumer<UpdateViewModel>(
+                  builder: (context, model, child) {
+                    return Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      //TODO:このカードはピンクカードとして基底クラスの作成をする
+                      // AnniversaryTileのカードもそうしたい
+                      child: Card(
+                        elevation: 8.0,
+                        color: Colors.pink.shade100,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                          child: DropdownButton(
+                            underline: Container(
+                              color: Colors.white,
+                              height: 1,
+                            ),
+                            dropdownColor: Colors.pink.shade100,
+                            iconEnabledColor: Colors.white,
+                            iconDisabledColor: Colors.white,
+                            style: const TextStyle(
+                                fontSize: 20, color: Colors.white),
+                            items: viewModel.anniversaryItems,
+                            value: viewModel.numAnniversary,
+                            onChanged: (int? selectedValue) {
+                              viewModel.onChanged(selectedValue);
+                            },
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  //TODO:このカードはピンクカードとして基底クラスの作成をする
+                  // AnniversaryTileのカードもそうしたい
+                  child: Card(
+                    elevation: 8.0,
+                    color: Colors.pink.shade100,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                      child: TextField(
+                        style:
+                            const TextStyle(fontSize: 20, color: Colors.white),
+                        maxLength: 8,
+                        maxLines: 1,
+                        decoration: const InputDecoration(
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.white,
+                            ),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.white,
+                            ),
+                          ),
+                          hintText: "例:○○の誕生日、××記念日",
+                          hintStyle: const TextStyle(color: Colors.white),
+                          labelText: "タイトル",
+                          labelStyle: const TextStyle(
+                            fontSize: 18.0,
+                            color: Colors.white,
+                          ),
+                          counterStyle: const TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  //TODO:このカードはピンクカードとして基底クラスの作成をする
+                  // AnniversaryTileのカードもそうしたい
+                  child: Card(
+                    elevation: 8.0,
+                    color: Colors.pink.shade100,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                      child: Consumer<UpdateViewModel>(
+                        builder: (context, model, child) {
+                          return Row(
+                            children: <Widget>[
+                              IconButton(
+                                icon: Icon(Icons.calendar_today,
+                                    color: Colors.white),
+                                onPressed: () {
+                                  DatePicker.showDatePicker(
+                                    context,
+                                    minTime: DateTime(1900, 1, 1),
+                                    maxTime: DateTime(2049, 12, 31),
+                                    currentTime: viewModel.selectDay,
+                                    locale: LocaleType.jp,
+                                    onConfirm: (date) {
+                                      viewModel.onConfirm(date);
+                                    },
+                                  );
+                                },
+                              ),
+                              Text(
+                                "${viewModel.selectDay.year}年/"
+                                "${viewModel.selectDay.month}月/"
+                                "${viewModel.selectDay.day}日",
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 128.0, vertical: 4.0),
+                  child: OutlinedButton(
+                    child: const Text('登録'),
+                    style: OutlinedButton.styleFrom(
                       elevation: 8.0,
-                      color: Colors.pink.shade100,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                        child: DropdownButton(
-                          underline: Container(
-                            color: Colors.white,
-                            height: 1,
-                          ),
-                          dropdownColor: Colors.pink.shade100,
-                          iconEnabledColor: Colors.white,
-                          iconDisabledColor: Colors.white,
-                          style: TextStyle(fontSize: 20, color: Colors.white),
-                          items: viewModel.anniversaryItems,
-                          value: viewModel.numAnniversary,
-                          onChanged: (int? selectedValue) {
-                            viewModel.onChanged(selectedValue);
-                          },
-                        ),
-                      ),
+                      primary: Colors.white,
+                      textStyle: const TextStyle(fontSize: 20.0),
+                      shape: const StadiumBorder(),
+                      side: const BorderSide(color: Colors.transparent),
+                      backgroundColor: Colors.pink.shade100,
                     ),
-                  );
-                },
-              ),
-              Padding(
-                padding: const EdgeInsets.all(4.0),
-                //TODO:このカードはピンクカードとして基底クラスの作成をする
-                // AnniversaryTileのカードもそうしたい
-                child: Card(
-                  elevation: 8.0,
-                  color: Colors.pink.shade100,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                    child: TextField(
-                      style: TextStyle(fontSize: 20, color: Colors.white),
-                      maxLength: 8,
-                      maxLines: 1,
-                      decoration: const InputDecoration(
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.white,
-                          ),
-                        ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.white,
-                          ),
-                        ),
-                        hintText: "例:○○の誕生日、××記念日",
-                        hintStyle: TextStyle(color: Colors.white),
-                        labelText: "タイトル",
-                        labelStyle: TextStyle(
-                          fontSize: 18.0,
-                          color: Colors.white,
-                        ),
-                        counterStyle: TextStyle(color: Colors.white),
-                      ),
-                    ),
+                    onPressed: () {},
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(4.0),
-                //TODO:このカードはピンクカードとして基底クラスの作成をする
-                // AnniversaryTileのカードもそうしたい
-                child: Card(
-                  elevation: 8.0,
-                  color: Colors.pink.shade100,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                    child: Consumer<UpdateViewModel>(
-                      builder: (context, model, child) {
-                        return Row(
-                          children: <Widget>[
-                            IconButton(
-                              icon: Icon(Icons.calendar_today,
-                                  color: Colors.white),
-                              onPressed: () {
-                                DatePicker.showDatePicker(
-                                  context,
-                                  minTime: DateTime(1900, 1, 1),
-                                  maxTime: DateTime(2049, 12, 31),
-                                  currentTime: viewModel.selectDay,
-                                  locale: LocaleType.jp,
-                                  onConfirm: (date) {
-                                    viewModel.onConfirm(date);
-                                  },
-                                );
-                              },
-                            ),
-                            Text(
-                              //TODO:この辺を西暦、月と日にちにする
-                              viewModel.selectDay.toString(),
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.white),
-                            ),
-                          ],
-                        );
-                      },
-                    ),
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
