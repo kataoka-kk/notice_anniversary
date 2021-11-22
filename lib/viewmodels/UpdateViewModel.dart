@@ -35,7 +35,6 @@ class UpdateViewModel extends ChangeNotifier {
     anniversaryItems.add(DropdownMenuItem(value: 1, child: Text("誕生日")));
     anniversaryItems.add(DropdownMenuItem(value: 2, child: Text("その他")));
     _isInit = true;
-
     _isUpdate ? _contentText = "更新" : _contentText = "追加";
   }
 
@@ -55,9 +54,7 @@ class UpdateViewModel extends ChangeNotifier {
     //updateに関しては、prefs.setString('data', "fine");こんな感じですぐできる。
 
     //indexがマッチするかどうかで追加、更新を振り分ける
-
-
-
+    
     //TODO:1.追加の場合
     //既存リストに新しくaddしたリストの作成
     //saveStorageAnniversaryに渡す
