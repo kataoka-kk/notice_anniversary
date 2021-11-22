@@ -54,6 +54,10 @@ class UpdateViewModel extends ChangeNotifier {
   void onEntry() {
     //updateに関しては、prefs.setString('data', "fine");こんな感じですぐできる。
 
+    //indexがマッチするかどうかで追加、更新を振り分ける
+
+
+
     //TODO:1.追加の場合
     //既存リストに新しくaddしたリストの作成
     //saveStorageAnniversaryに渡す
@@ -63,6 +67,6 @@ class UpdateViewModel extends ChangeNotifier {
     //のち、それをリスト化
     //のち、saveStorageAnniversaryに渡す
 
-    // _storageRepository.saveStorageAnniversary(storageKey,)
+    // _storageRepository.saveStorageAnniversary(storageKey,list);
   }
 }

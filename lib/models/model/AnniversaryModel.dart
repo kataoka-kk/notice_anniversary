@@ -5,11 +5,13 @@ part 'AnniversaryModel.g.dart';
 
 @JsonSerializable()
 class Anniversary {
+  final int id;
   final String title;
   final int tagNum;
   final DateTime dateTime;
 
   Anniversary({
+    required this.id,
     required this.title,
     required this.tagNum,
     required this.dateTime,

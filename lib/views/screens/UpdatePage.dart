@@ -8,12 +8,13 @@ class UpdatePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.read<UpdateViewModel>();
+    final int listId = ModalRoute.of(context)!.settings.arguments as int;
+
     if (!viewModel.isInit) {
       print("!viewModel.isInit: init");
+      print(listId);
       viewModel.setItems();
     }
-
-    //TODO 11/18～UpdatePageに追加機能の作成
 
     return SafeArea(
       child: Scaffold(

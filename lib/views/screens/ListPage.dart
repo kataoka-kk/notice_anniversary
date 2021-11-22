@@ -15,12 +15,20 @@ class ListPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.pink.shade50,
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.pink.shade200,
-          child: Icon(Icons.add),
-          tooltip: "追加",
-          onPressed: () {
-            Navigator.pushNamed(context, '/Update');
+        floatingActionButton: Consumer<ListViewModel>(
+          builder: (context, model, child) {
+            return FloatingActionButton(
+              backgroundColor: Colors.pink.shade200,
+              child: Icon(Icons.add),
+              tooltip: "追加",
+              onPressed: () {
+                Navigator.pushNamed(
+                  context,
+                  '/Update',
+                  arguments: model.anniversaries.length,
+                );
+              },
+            );
           },
         ),
         body: SingleChildScrollView(
