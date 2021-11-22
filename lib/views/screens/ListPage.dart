@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notice_anniversary/models/model/AnniversaryModel.dart';
 import 'package:notice_anniversary/viewmodels/ListViewModel.dart';
 import 'package:notice_anniversary/views/components/AnniversaryTile.dart';
 import 'package:provider/provider.dart';
@@ -24,8 +25,9 @@ class ListPage extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(
                   context,
-                  '/Update',
-                  arguments: model.anniversaries.length,
+                  '/Add',
+                  arguments: model.anniversaries,
+                  // arguments: setTest(),
                 );
               },
             );
@@ -51,6 +53,8 @@ class ListPage extends StatelessWidget {
     print("Widget listViewBuilder(ListViewModel model)!!!!!!!!!");
     print(model.anniversaries.length);
     print(model.anniversaries);
+
+    //TODO:こっちの方では行をタップすると'/Update'を呼び出す
 
     return ListView.builder(
       shrinkWrap: true,
@@ -82,5 +86,14 @@ class ListPage extends StatelessWidget {
     //     ),
     //   ),
     // );
+  }
+
+  //TODO テストコード
+  List<Anniversary> setTest() {
+    List<Anniversary> list = [];
+
+    list.add(Anniversary(
+        id: 99, title: "title", tagNum: 1, dateTime: DateTime.now()));
+    return list;
   }
 }

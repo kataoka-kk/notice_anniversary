@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 class ScreenConst {
   static Map<String, WidgetBuilder> screens = {
     '/': (context) => ListPage(),
-    '/Update': (context) => UpdatePage(),
+    '/Update': (context) => UpdatePage(isUpdate: true),
+    '/Add': (context) => UpdatePage(isUpdate: false),
   };
 }

@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:notice_anniversary/models/model/AnniversaryModel.dart';
 import 'package:notice_anniversary/viewmodels/UpdateViewModel.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/src/provider.dart';
 
 class UpdatePage extends StatelessWidget {
+  final bool isUpdate;
+
+  const UpdatePage({Key? key, required this.isUpdate}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final viewModel = context.read<UpdateViewModel>();
-    final int listId = ModalRoute.of(context)!.settings.arguments as int;
+    viewModel.anniversaries =
+        ModalRoute.of(context)!.settings.arguments as List<Anniversary>;
 
+    //TODO ライフサイクルの見直しでリファクタが必要
     if (!viewModel.isInit) {
       print("!viewModel.isInit: init");
-      print(listId);
-      viewModel.setItems();
+      viewModel.setItems(isUpdate);
     }
 
     return SafeArea(
@@ -52,7 +58,7 @@ class UpdatePage extends StatelessWidget {
                             items: viewModel.anniversaryItems,
                             value: viewModel.numAnniversary,
                             onChanged: (int? selectedValue) {
-                              viewModel.onChanged(selectedValue);
+                              viewModel.onDropdownChanged(selectedValue);
                             },
                           ),
                         ),
@@ -97,6 +103,9 @@ class UpdatePage extends StatelessWidget {
                           ),
                           counterStyle: const TextStyle(color: Colors.white),
                         ),
+                        onChanged: (value) {
+                          viewModel.onTitleChanged(value);
+                        },
                       ),
                     ),
                   ),

@@ -24,10 +24,11 @@ class StorageRepository {
     var completer = new Completer<List<Anniversary>>();
     List<Anniversary> results = [];
     _instance.prefs.then((pref) {
-      final storageList = pref.getStringList(key) as dynamic;
+      final storageList = pref.getStringList(key);
       if (storageList != null) {
-        results =
-            Anniversary.fromJson(jsonDecode(storageList)) as List<Anniversary>;
+        results = storageList
+            .map((e) => Anniversary.fromJson(jsonDecode(e)))
+            .toList();
       }
       completer.complete(results);
     });
