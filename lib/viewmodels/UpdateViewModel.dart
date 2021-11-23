@@ -78,16 +78,18 @@ class UpdateViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onEntry() {
-    //updateに関しては、prefs.setString('data', "fine");こんな感じですぐできる。
+  void onEntry(int? listId) {
     print("UpdateViewModel void onEntry()");
     if (_isUpdate) {
-      //新規
-
-      //TODO:1.追加の場合
-      //既存リストに新しくaddしたリストの作成
-      //saveStorageAnniversaryに渡す
-      
+      //更新
+      for (final v in _anniversaries) {
+        if (v.id == listId) {
+          v.title = _contentTitle;
+          v.tagNum = _numAnniversary;
+          v.dateTime = _selectDay;
+          break;
+        }
+      }
     } else {
       print("UpdateViewModel add");
       //追加

@@ -7,8 +7,13 @@ import 'package:provider/src/provider.dart';
 
 class UpdatePage extends StatelessWidget {
   final bool isUpdate;
+  final int? anniversary_id;
 
-  const UpdatePage({Key? key, required this.isUpdate}) : super(key: key);
+  const UpdatePage({
+    Key? key,
+    required this.isUpdate,
+    this.anniversary_id,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -192,7 +197,7 @@ class UpdatePage extends StatelessWidget {
                                   ),
                                   TextButton(
                                     onPressed: () {
-                                      viewModel.onEntry();
+                                      viewModel.onEntry(anniversary_id);
                                       Navigator.pop(context);
                                     },
                                     child: Text(
