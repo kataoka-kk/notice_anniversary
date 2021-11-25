@@ -18,14 +18,12 @@ class UpdatePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.read<UpdateViewModel>();
+    final textController = TextEditingController();
+
     viewModel.anniversaries =
         ModalRoute.of(context)!.settings.arguments as List<Anniversary>;
-
-    //TODO ライフサイクルの見直しでリファクタが必要
-    if (!viewModel.isInit) {
-      print("!viewModel.isInit: init");
-      viewModel.setItems(isUpdate);
-    }
+    viewModel.setItems(isUpdate, anniversary_id);
+    textController.text = viewModel.contentTitle;
 
     return SafeArea(
       child: Scaffold(
@@ -84,6 +82,7 @@ class UpdatePage extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12.0),
                       child: TextField(
+                        controller: textController,
                         style:
                             const TextStyle(fontSize: 20, color: Colors.white),
                         maxLength: 8,
@@ -184,9 +183,9 @@ class UpdatePage extends StatelessWidget {
                             context: context,
                             builder: (_) {
                               return AlertDialog(
-                                title: Text(viewModel.contentText),
-                                content: Text(
-                                    "上記を${viewModel.contentText}してもいいですか？"),
+                                title: Text(viewModel.dialogText),
+                                content:
+                                    Text("上記を${viewModel.dialogText}してもいいですか？"),
                                 actions: <Widget>[
                                   TextButton(
                                     onPressed: () => Navigator.pop(context),

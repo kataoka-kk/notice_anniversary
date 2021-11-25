@@ -9,13 +9,13 @@ class ListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final viewModel = context.read<ListViewModel>();
     if (!viewModel.isLoad) {
-      print("!viewModel.isLoad: init");
       viewModel.loadAnniversary();
     }
 
-    //TODO:list→updateの際にlistからの内容を引き継ぐ流れの実装
-    //TODO:通知機能の追加
     //TODO:各コードのリファクタリングを行う
+    //→1.UI側を行う（ピンクタイル。）
+    //→2.ListPage→UpdatePageの引数や、argumentsで渡してるので一貫性がない件
+    //TODO:通知機能の追加
 
     return SafeArea(
       child: Scaffold(

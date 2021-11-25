@@ -9,18 +9,15 @@ class UpdateViewModel extends ChangeNotifier {
   final StorageRepository _storageRepository = StorageRepository();
 
   //region view関連
-  bool _isInit = false;
-
-  bool get isInit => _isInit;
 
   //追加か更新かの判断に使用する
   bool _isUpdate = false;
 
   bool get isUpdate => _isUpdate;
 
-  String _contentText = "追加";
+  String _dialogText = "追加";
 
-  String get contentText => _contentText;
+  String get dialogText => _dialogText;
 
   //endregion
 
@@ -51,15 +48,27 @@ class UpdateViewModel extends ChangeNotifier {
     _anniversaries = value;
   }
 
-  void setItems(bool isUpdate) {
-    print("UpdateViewModel setItems");
-    print(isUpdate);
-    anniversaryItems.add(DropdownMenuItem(value: 0, child: Text("記念日")));
-    anniversaryItems.add(DropdownMenuItem(value: 1, child: Text("誕生日")));
-    anniversaryItems.add(DropdownMenuItem(value: 2, child: Text("その他")));
-    _isInit = true;
+  void setItems(bool isUpdate, int? id) {
     _isUpdate = isUpdate;
-    _isUpdate ? _contentText = "更新" : _contentText = "追加";
+
+    if (anniversaryItems.length == 0) {
+      anniversaryItems.add(DropdownMenuItem(value: 0, child: Text("記念日")));
+      anniversaryItems.add(DropdownMenuItem(value: 1, child: Text("誕生日")));
+      anniversaryItems.add(DropdownMenuItem(value: 2, child: Text("その他")));
+    }
+
+    if (_isUpdate) {
+      _dialogText = "更新";
+      var e = _anniversaries.firstWhere((element) => element.id == id);
+      _numAnniversary = e.tagNum;
+      _contentTitle = e.title;
+      _selectDay = e.dateTime;
+    } else {
+      _dialogText = "追加";
+      _numAnniversary = 0;
+      _contentTitle = "";
+      _selectDay = DateTime.now();
+    }
   }
 
   void onDropdownChanged(int? value) {
