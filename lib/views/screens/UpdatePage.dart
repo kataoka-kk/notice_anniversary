@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:notice_anniversary/models/model/AnniversaryModel.dart';
 import 'package:notice_anniversary/viewmodels/UpdateViewModel.dart';
+import 'package:notice_anniversary/views/components/BasePinkCard.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/src/provider.dart';
 
@@ -36,16 +37,9 @@ class UpdatePage extends StatelessWidget {
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.all(4.0),
-                  //TODO:このカードはピンクカードとして基底クラスの作成をする
-                  // AnniversaryTileのカードもそうしたい
                   child: Consumer<UpdateViewModel>(
                     builder: (context, model, child) {
-                      return Card(
-                        elevation: 8.0,
-                        color: Colors.pink.shade100,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
+                      return BasePinkCard(
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 12.0),
                           child: DropdownButton(
@@ -71,14 +65,7 @@ class UpdatePage extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(4.0),
-                  //TODO:このカードはピンクカードとして基底クラスの作成をする
-                  // AnniversaryTileのカードもそうしたい
-                  child: Card(
-                    elevation: 8.0,
-                    color: Colors.pink.shade100,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
+                  child: BasePinkCard(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12.0),
                       child: TextField(
@@ -116,14 +103,7 @@ class UpdatePage extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(4.0),
-                  //TODO:このカードはピンクカードとして基底クラスの作成をする
-                  // AnniversaryTileのカードもそうしたい
-                  child: Card(
-                    elevation: 8.0,
-                    color: Colors.pink.shade100,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
+                  child: BasePinkCard(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12.0),
                       child: Consumer<UpdateViewModel>(

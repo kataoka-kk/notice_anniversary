@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notice_anniversary/const/ConstInfo.dart';
+import 'package:notice_anniversary/views/components/BasePinkCard.dart';
 
 class AnniversaryTile extends StatelessWidget {
   final int month;
@@ -27,12 +28,7 @@ class AnniversaryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 8.0,
-      color: Colors.pink.shade100,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.0),
-      ),
+    return BasePinkCard(
       child: Container(
         height: 100,
         child: Column(
