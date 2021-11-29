@@ -172,7 +172,10 @@ class UpdatePage extends StatelessWidget {
                                   TextButton(
                                     onPressed: () {
                                       viewModel.onEntry(anniversary_id);
-                                      Navigator.pop(context);
+                                      Navigator.popUntil(
+                                        context,
+                                        ModalRoute.withName("/"),
+                                      );
                                     },
                                     child: Text(
                                       "OK",

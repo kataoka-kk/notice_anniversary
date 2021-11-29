@@ -10,16 +10,9 @@ class ListViewModel extends ChangeNotifier {
 
   List<Anniversary> get anniversaries => _anniversaries;
 
-  bool _isLoad = false;
-
-  bool get isLoad => _isLoad;
-
-  //TODO:登録した後に再描画がかからない。ので登録後にこの画面に戻っても反映されない
-
   Future<void> loadAnniversary() async {
     _anniversaries =
         await _storageRepository.loadStorageAnniversary(storageKey);
-    _isLoad = true;
     notifyListeners();
   }
 }

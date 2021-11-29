@@ -8,9 +8,7 @@ class ListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.read<ListViewModel>();
-    if (!viewModel.isLoad) {
-      viewModel.loadAnniversary();
-    }
+    viewModel.loadAnniversary();
 
     //TODO:各コードのリファクタリングを行う
     //OK→1.UI側を行う（ピンクタイル。）
@@ -28,11 +26,7 @@ class ListPage extends StatelessWidget {
               child: Icon(Icons.add),
               tooltip: "追加",
               onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  '/Add',
-                  arguments: model.anniversaries,
-                );
+                movePage(model, context, "/Add");
               },
             );
           },
@@ -69,14 +63,20 @@ class ListPage extends StatelessWidget {
           ),
           onTap: () {
             ScreenConst.anniversary_id = model.anniversaries[position].id;
-            Navigator.pushNamed(
-              context,
-              '/Update',
-              arguments: model.anniversaries,
-            );
+            movePage(model, context, '/Update');
           },
         ),
       ),
     );
+  }
+
+  void movePage(ListViewModel model, BuildContext context, String routeName) {
+    Navigator.pushNamed(
+      context,
+      routeName,
+      arguments: model.anniversaries,
+    ).then((value) {
+      model.loadAnniversary();
+    });
   }
 }
