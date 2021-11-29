@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notice_anniversary/const/ConstInfo.dart';
-import 'package:notice_anniversary/views/components/BasePinkCard.dart';
+import 'package:notice_anniversary/views/bases/BasePinkCard.dart';
 
 class AnniversaryTile extends StatelessWidget {
   final int month;

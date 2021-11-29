@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:notice_anniversary/models/model/AnniversaryModel.dart';
 import 'package:notice_anniversary/viewmodels/UpdateViewModel.dart';
-import 'package:notice_anniversary/views/components/BasePinkCard.dart';
+import 'package:notice_anniversary/views/bases/BasePinkCard.dart';
+import 'package:notice_anniversary/views/components/AnniversaryTypeDropdown.dart';
+import 'package:notice_anniversary/views/components/TitleTextField.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/src/provider.dart';
 
@@ -144,71 +146,6 @@ class UpdatePage extends StatelessWidget {
               },
             ),
           ),
-        ),
-      ),
-    );
-  }
-
-  //(記念日,誕生日,その他)のドロップダウンリスト
-  Widget anniversaryTypeDropdown(UpdateViewModel model) {
-    return BasePinkCard(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0),
-        child: DropdownButton(
-          underline: Container(
-            color: Colors.white,
-            height: 1,
-          ),
-          dropdownColor: Colors.pink.shade100,
-          iconEnabledColor: Colors.white,
-          iconDisabledColor: Colors.white,
-          style: const TextStyle(fontSize: 20, color: Colors.white),
-          items: model.anniversaryItems,
-          value: model.numAnniversary,
-          onChanged: (int? selectedValue) {
-            model.onDropdownChanged(selectedValue);
-          },
-        ),
-      ),
-    );
-  }
-
-  //タイトルのテキストフィールド
-  Widget titleTextField(UpdateViewModel model) {
-    final textController = TextEditingController();
-    textController.text = model.contentTitle;
-
-    return BasePinkCard(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0),
-        child: TextField(
-          controller: textController,
-          style: const TextStyle(fontSize: 20, color: Colors.white),
-          maxLength: 8,
-          maxLines: 1,
-          decoration: const InputDecoration(
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.white,
-              ),
-            ),
-            enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.white,
-              ),
-            ),
-            hintText: "例:○○の誕生日、××記念日",
-            hintStyle: const TextStyle(color: Colors.white),
-            labelText: "タイトル",
-            labelStyle: const TextStyle(
-              fontSize: 18.0,
-              color: Colors.white,
-            ),
-            counterStyle: const TextStyle(color: Colors.white),
-          ),
-          onChanged: (value) {
-            model.onTitleChanged(value);
-          },
         ),
       ),
     );
