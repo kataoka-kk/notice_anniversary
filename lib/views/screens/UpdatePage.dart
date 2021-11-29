@@ -19,12 +19,10 @@ class UpdatePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.read<UpdateViewModel>();
-    final textController = TextEditingController();
 
     viewModel.anniversaries =
         ModalRoute.of(context)!.settings.arguments as List<Anniversary>;
     viewModel.setItems(isUpdate, anniversary_id);
-    textController.text = viewModel.contentTitle;
 
     return SafeArea(
       child: Scaffold(
@@ -39,100 +37,52 @@ class UpdatePage extends StatelessWidget {
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.all(4.0),
-                      child: BasePinkCard(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                          child: DropdownButton(
-                            underline: Container(
-                              color: Colors.white,
-                              height: 1,
-                            ),
-                            dropdownColor: Colors.pink.shade100,
-                            iconEnabledColor: Colors.white,
-                            iconDisabledColor: Colors.white,
-                            style: const TextStyle(
-                                fontSize: 20, color: Colors.white),
-                            items: viewModel.anniversaryItems,
-                            value: viewModel.numAnniversary,
-                            onChanged: (int? selectedValue) {
-                              viewModel.onDropdownChanged(selectedValue);
-                            },
-                          ),
-                        ),
-                      ),
+                      child: anniversaryTypeDropdown(model),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: titleTextField(model),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(4.0),
                       child: BasePinkCard(
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                          child: TextField(
-                            controller: textController,
-                            style: const TextStyle(
-                                fontSize: 20, color: Colors.white),
-                            maxLength: 8,
-                            maxLines: 1,
-                            decoration: const InputDecoration(
-                              focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.white,
-                                ),
+                          child: GestureDetector(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
+                              child: Row(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 16.0),
+                                    child: Icon(Icons.calendar_today,
+                                        color: Colors.white),
+                                  ),
+                                  Text(
+                                    "${viewModel.selectDay.year}年/"
+                                    "${viewModel.selectDay.month}月/"
+                                    "${viewModel.selectDay.day}日",
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              hintText: "例:○○の誕生日、××記念日",
-                              hintStyle: const TextStyle(color: Colors.white),
-                              labelText: "タイトル",
-                              labelStyle: const TextStyle(
-                                fontSize: 18.0,
-                                color: Colors.white,
-                              ),
-                              counterStyle:
-                                  const TextStyle(color: Colors.white),
                             ),
-                            onChanged: (value) {
-                              viewModel.onTitleChanged(value);
-                            },
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: BasePinkCard(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                          child: Row(
-                            children: <Widget>[
-                              IconButton(
-                                icon: Icon(Icons.calendar_today,
-                                    color: Colors.white),
-                                onPressed: () {
-                                  DatePicker.showDatePicker(
-                                    context,
-                                    minTime: DateTime(1900, 1, 1),
-                                    maxTime: DateTime(2049, 12, 31),
-                                    currentTime: viewModel.selectDay,
-                                    locale: LocaleType.jp,
-                                    onConfirm: (date) {
-                                      viewModel.onConfirm(date);
-                                    },
-                                  );
+                            onTap: () {
+                              DatePicker.showDatePicker(
+                                context,
+                                minTime: DateTime(1900, 1, 1),
+                                maxTime: DateTime(2049, 12, 31),
+                                currentTime: viewModel.selectDay,
+                                locale: LocaleType.jp,
+                                onConfirm: (date) {
+                                  viewModel.onConfirm(date);
                                 },
-                              ),
-                              Text(
-                                "${viewModel.selectDay.year}年/"
-                                "${viewModel.selectDay.month}月/"
-                                "${viewModel.selectDay.day}日",
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
+                              );
+                            },
                           ),
                         ),
                       ),
@@ -194,6 +144,71 @@ class UpdatePage extends StatelessWidget {
               },
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  //(記念日,誕生日,その他)のドロップダウンリスト
+  Widget anniversaryTypeDropdown(UpdateViewModel model) {
+    return BasePinkCard(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        child: DropdownButton(
+          underline: Container(
+            color: Colors.white,
+            height: 1,
+          ),
+          dropdownColor: Colors.pink.shade100,
+          iconEnabledColor: Colors.white,
+          iconDisabledColor: Colors.white,
+          style: const TextStyle(fontSize: 20, color: Colors.white),
+          items: model.anniversaryItems,
+          value: model.numAnniversary,
+          onChanged: (int? selectedValue) {
+            model.onDropdownChanged(selectedValue);
+          },
+        ),
+      ),
+    );
+  }
+
+  //タイトルのテキストフィールド
+  Widget titleTextField(UpdateViewModel model) {
+    final textController = TextEditingController();
+    textController.text = model.contentTitle;
+
+    return BasePinkCard(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        child: TextField(
+          controller: textController,
+          style: const TextStyle(fontSize: 20, color: Colors.white),
+          maxLength: 8,
+          maxLines: 1,
+          decoration: const InputDecoration(
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.white,
+              ),
+            ),
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.white,
+              ),
+            ),
+            hintText: "例:○○の誕生日、××記念日",
+            hintStyle: const TextStyle(color: Colors.white),
+            labelText: "タイトル",
+            labelStyle: const TextStyle(
+              fontSize: 18.0,
+              color: Colors.white,
+            ),
+            counterStyle: const TextStyle(color: Colors.white),
+          ),
+          onChanged: (value) {
+            model.onTitleChanged(value);
+          },
         ),
       ),
     );
