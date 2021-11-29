@@ -32,14 +32,14 @@ class UpdatePage extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: Consumer<UpdateViewModel>(
-                    builder: (context, model, child) {
-                      return BasePinkCard(
+            child: Consumer<UpdateViewModel>(
+              builder: (context, model, child) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: BasePinkCard(
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 12.0),
                           child: DropdownButton(
@@ -59,56 +59,53 @@ class UpdatePage extends StatelessWidget {
                             },
                           ),
                         ),
-                      );
-                    },
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: BasePinkCard(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                      child: TextField(
-                        controller: textController,
-                        style:
-                            const TextStyle(fontSize: 20, color: Colors.white),
-                        maxLength: 8,
-                        maxLines: 1,
-                        decoration: const InputDecoration(
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.white,
-                            ),
-                          ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.white,
-                            ),
-                          ),
-                          hintText: "例:○○の誕生日、××記念日",
-                          hintStyle: const TextStyle(color: Colors.white),
-                          labelText: "タイトル",
-                          labelStyle: const TextStyle(
-                            fontSize: 18.0,
-                            color: Colors.white,
-                          ),
-                          counterStyle: const TextStyle(color: Colors.white),
-                        ),
-                        onChanged: (value) {
-                          viewModel.onTitleChanged(value);
-                        },
                       ),
                     ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: BasePinkCard(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                      child: Consumer<UpdateViewModel>(
-                        builder: (context, model, child) {
-                          return Row(
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: BasePinkCard(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                          child: TextField(
+                            controller: textController,
+                            style: const TextStyle(
+                                fontSize: 20, color: Colors.white),
+                            maxLength: 8,
+                            maxLines: 1,
+                            decoration: const InputDecoration(
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              hintText: "例:○○の誕生日、××記念日",
+                              hintStyle: const TextStyle(color: Colors.white),
+                              labelText: "タイトル",
+                              labelStyle: const TextStyle(
+                                fontSize: 18.0,
+                                color: Colors.white,
+                              ),
+                              counterStyle:
+                                  const TextStyle(color: Colors.white),
+                            ),
+                            onChanged: (value) {
+                              viewModel.onTitleChanged(value);
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: BasePinkCard(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                          child: Row(
                             children: <Widget>[
                               IconButton(
                                 icon: Icon(Icons.calendar_today,
@@ -136,19 +133,17 @@ class UpdatePage extends StatelessWidget {
                                 ),
                               ),
                             ],
-                          );
-                        },
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 128.0, vertical: 4.0),
-                  child: Consumer<UpdateViewModel>(
-                    builder: (context, model, child) {
-                      return OutlinedButton(
+                    const SizedBox(height: 20),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 128.0,
+                        vertical: 4.0,
+                      ),
+                      child: OutlinedButton(
                         child: const Text('登録'),
                         style: OutlinedButton.styleFrom(
                           elevation: 8.0,
@@ -189,11 +184,11 @@ class UpdatePage extends StatelessWidget {
                             },
                           );
                         },
-                      );
-                    },
-                  ),
-                ),
-              ],
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
           ),
         ),

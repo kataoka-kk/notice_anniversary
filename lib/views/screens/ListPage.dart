@@ -14,7 +14,7 @@ class ListPage extends StatelessWidget {
 
     //TODO:各コードのリファクタリングを行う
     //OK→1.UI側を行う（ピンクタイル。）
-    //→2.Consumerを全体にかける
+    //OK→2.Consumerを全体にかける
     //→3.ListPage→UpdatePageの引数や、argumentsで渡してるので一貫性がない件
     //TODO:通知機能の追加
 
